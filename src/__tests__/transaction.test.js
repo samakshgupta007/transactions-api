@@ -75,7 +75,6 @@ describe('Transaction', () => {
         const res = await request(app)
             .get(`/api/v1/transactions/75849?from=${moment('2021-07-01').toISOString()}`);
 
-        console.log('got it now', res.body);
         expect(res.statusCode).toEqual(200)
         expect(res.body.length).toBe(0);
         expect(res.body).toStrictEqual([]);
