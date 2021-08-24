@@ -86,11 +86,16 @@ Or it will return an error due to bad data or unavailable service.
 
 - Moreover, we can run cron jobs to summarize the data every night and store that summarized data into a summary table. For example, we can update the total spend of each user on each merchant and keep that data in a different table. With indices on the columns of the summary table - our query speed would improve and improve scalability, providing a performance advantage. We might take a small hit in accuracy in this case - however, if the data set is large, then the results would be relatively accurate with maybe 1-2% offsets at the maximum.
 
-- We can also store the 'display_name' of the merchant in the 'transactions' table and avoid the LEFT OUTER JOIN operation in the query.
+- We can also store the 'display_name' of the merchant in the 'transactions' table and avoid the LEFT OUTER JOIN operation in the query. 
 
-In order to scale the application we can use a few techniques: 
+Postgres offers partitioning DDL. So you can easily create partitions for every week/month.
 
-- Postgres 10 brings partitioning DDL. So you can easily create partitions for every week/month. Advantages of partitioning included here - https://www.postgresql.org/docs/10/ddl-partitioning.html#ddl-partitioning-declarative
+- Query performance can be improved dramatically in certain situations, particularly when most of the heavily accessed rows of the table are in a single partition or a small number of partitions. The partitioning substitutes for leading columns of indexes, reducing index size and making it more likely that the heavily-used parts of the indexes fit in memory.
+
+- When queries or updates access a large percentage of a single partition, performance can be improved by taking advantage of sequential scan of that partition instead of using an index and random access reads scattered across the whole table.
+
+
+In order to scale the application we can use a few other techniques:
 
 - Distributed, in-memory, scale-out architecture: query performance improves significantly when the underlying database can run SQL on very large data sets that have been distributed and stored in RAM across multiple computers. This is called data sharding, and it makes it possible for queries to run across multiple computers in parallel.
 
