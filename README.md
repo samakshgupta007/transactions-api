@@ -65,14 +65,16 @@ Moreover, To see the output of your containers during their execution time, just
 
 ### Calling the Transactions API
 
-The API is available at the endpoint /api/v1/transactions/:userId?from={some_date_iso_string}&to=${another_date_iso_string}
+The API is available at the endpoint
+
+    $ /api/v1/transactions/:userId?from={some_date_iso_string}&to=${another_date_iso_string}
 
 Calling this endpoint - either on localhost:PORT or using the docker IP address will give you an array of objects of the type:
 
 [{
 "display_name": "Merchant Name",
 "user_id": "userId",
-"Percentile": Floating point number - which needs to multiplied by 100 to get the percentile value
+"Percentile": 0.5 (Floating point number - which needs to multiplied by 100 to get the percentile value)
 }]
 
 Or it will return an error due to bad data or unavailable service.
