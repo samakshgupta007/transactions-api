@@ -72,4 +72,39 @@ describe('Transaction', () => {
             'Merchant.display_name': 'Merchant1'
         });
     })
+
+    it('GET /transaction/:userId - returns a 200 status code and empty array for user who has not made a transaction in the specified date range', async () => {
+        const res = await request(app)
+            .get(`/api/v1/transactions/75849?from=${moment('2021-07-01').toISOString()}`);
+
+        expect(res.statusCode).toEqual(200)
+        expect(res.body.length).toBe(0);
+        expect(res.body).toStrictEqual([]);
+    })
+
+    it('GET /transaction/:userId - returns a 200 status code and percentile of 1 for user who has made the most transactions & percentile of 0 for user who has not made the least number of transactions in the specified date range and mapped to the merchants', async () => {
+        const res = await request(app)
+            .get(`/api/v1/transactions/65935?from=${moment('2021-05-01').toISOString()}`);
+
+        expect(res.statusCode).toEqual(200)
+        expect(res.body.length).toBe(3);
+        expect(res.body[0]).toStrictEqual({
+            user_id: 65935,
+            Percentile: 0,
+            'Merchant.id': 17700,
+            'Merchant.display_name': 'Merchant3'
+        });
+        expect(res.body[1]).toStrictEqual({
+            user_id: 65935,
+            Percentile: 0.5,
+            'Merchant.id': 67900,
+            'Merchant.display_name': 'Merchant1'
+          });
+        expect(res.body[2]).toStrictEqual({
+            user_id: 65935,
+            Percentile: 1,
+            'Merchant.id': 98400,
+            'Merchant.display_name': 'Merchant2'
+          });
+    })
   })
