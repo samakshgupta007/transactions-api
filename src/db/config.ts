@@ -11,7 +11,7 @@ const sequelizeConnection = new Sequelize(dbName, dbUser, dbPassword, {
   host: dbHost,
   dialect: 'postgres',
   port: parseInt(process.env.UNIQUE_NAME_PG_PORT as string),
-  logging: false
+  logging: false,
 })
 
 export default sequelizeConnection

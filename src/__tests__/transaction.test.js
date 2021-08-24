@@ -39,7 +39,7 @@ describe('Transaction', () => {
             .get('/api/v1/transactions/32780');
 
         expect(res.statusCode).toEqual(400)
-        expect(res.text).toBe('User not found');
+        expect(res.text).toBe('No data found for this user');
     })
 
     it('GET /transaction/:userId - returns a 400 error code (bad data) for passing from date after to date', async () => {
