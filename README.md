@@ -39,6 +39,10 @@ You can then run the application on your local machine by navigating to the fold
 
     $ npm run start
 
-Alternatively you can run the application in development mode using the command:
+Alternatively you can run the application in development mode using the command
 
     $ npm run dev
+
+Moreover, you can run the tests by entering this command in terminal - in the project folder
+
+    $ npm run test
