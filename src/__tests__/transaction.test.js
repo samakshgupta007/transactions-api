@@ -10,9 +10,9 @@ describe('Transaction', () => {
 
     beforeAll(async () => {
         pool = new Pool({
-            database: 'postgres-test',
-            user: 'postgres',
-            password: 'password',
+            database: process.env.DB_NAME_TEST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
             port: 5432,
         });
         pool.query("CREATE TABLE merchants (id SERIAL PRIMARY KEY, display_name TEXT);");

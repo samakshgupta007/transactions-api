@@ -6,7 +6,7 @@ To package and run this application, you'll need to:
 
 - Clone this repository:
 
-      $ git clone https://github.com/habitat-sh/sample-node-app.git
+      $ git clone https://github.com/samakshgupta007/transactions-api.git
       $ cd transactions-api
 
 - [Install Docker](https://www.docker.com/community-edition) (if you're on Mac or Windows) - Optional
@@ -78,3 +78,8 @@ Calling this endpoint - either on localhost:PORT or using the docker IP address 
 }]
 
 Or it will return an error due to bad data or unavailable service.
+
+
+### Scalability & Resource Consumption
+
+

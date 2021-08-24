@@ -30,28 +30,5 @@ export const getMerchantDataByUserId = async ({ userId, from, to } : UserIdDto) 
         console.log('Error:', err);
     });
 
-    return userTransactions || [];
-
-    // TODO: Having clause is changing the data in the percentile field - not filtering it as we need it to and returning incorrect values.
-    // FIXME: Currently executing it as a raw sql query using sequelize.
-    // const where = {
-    //     date: {
-    //         [Op.between]: [from, to]
-    //     }
-    // };
-    // await Transaction.findAll({ 
-    //     raw: true,
-    //     where,
-    //     attributes: [
-    //         'user_id',
-    //         [Sequelize.literal(`PERCENT_RANK() OVER(PARTITION BY merchant_id ORDER BY SUM(amount) ASC)`), 'Percentile'],
-    //     ],
-    //     include:[
-    //         { model: Merchant, attributes: [ 'id', 'display_name' ] },
-    //     ],
-    //     group: ['Transaction.user_id', 'Transaction.merchant_id', 'Merchant.id', 'Merchant.display_name'],
-    //     having: Sequelize.literal(`user_id = ${userId}`)
-    // }).then(function(data) {
-    //     console.log('got it now', data);
-    // });
+    return userTransactions;
 }
