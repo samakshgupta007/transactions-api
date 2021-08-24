@@ -33,7 +33,7 @@ Alternatively, you can install pgAdmin4 - which is the latest GUI for postgres. 
 
 - Set up databases 'postgres' and 'postgres-test' for the application to connect to. You can use the env variables in '.env.example' for the databse credentials you can set up and directly copy '.env.example' to '.env' to set up the environment variables.
 
-### Running the Application
+### Running the Application Locally
 
 You can then run the application on your local machine by navigating to the folder with the cloned repository and running the following command
 
@@ -46,3 +46,17 @@ Alternatively you can run the application in development mode using the command
 Moreover, you can run the tests by entering this command in terminal - in the project folder
 
     $ npm run test
+
+
+### Running the Application using Docker
+
+Ensure you have docker and docker-compose installed, if you wish to run the application using docker. Then navigate to the project folder and run the following command in the terminal: 
+
+    $ docker-compose up --build -d
+
+- The '-d' command ensures the container are run in the background or in a 'detached' state.
+
+- You can view the docker containers with their associated ID, name, status, and port using this command
+
+    $ docker ps -a
+
