@@ -62,14 +62,12 @@ describe('Transaction', () => {
         expect(res.body[0]).toStrictEqual({
             user_id: 75849,
             Percentile: 1,
-            'Merchant.id': 17700,
-            'Merchant.display_name': 'Merchant3'
+            'display_name': 'Merchant3'
         });
         expect(res.body[1]).toStrictEqual({
             user_id: 75849,
             Percentile: 0.75,
-            'Merchant.id': 67900,
-            'Merchant.display_name': 'Merchant1'
+            'display_name': 'Merchant1'
         });
     })
 
@@ -77,6 +75,7 @@ describe('Transaction', () => {
         const res = await request(app)
             .get(`/api/v1/transactions/75849?from=${moment('2021-07-01').toISOString()}`);
 
+        console.log('got it now', res.body);
         expect(res.statusCode).toEqual(200)
         expect(res.body.length).toBe(0);
         expect(res.body).toStrictEqual([]);
@@ -91,20 +90,17 @@ describe('Transaction', () => {
         expect(res.body[0]).toStrictEqual({
             user_id: 65935,
             Percentile: 0,
-            'Merchant.id': 17700,
-            'Merchant.display_name': 'Merchant3'
+            'display_name': 'Merchant3'
         });
         expect(res.body[1]).toStrictEqual({
             user_id: 65935,
             Percentile: 0.5,
-            'Merchant.id': 67900,
-            'Merchant.display_name': 'Merchant1'
+            'display_name': 'Merchant1'
           });
         expect(res.body[2]).toStrictEqual({
             user_id: 65935,
             Percentile: 1,
-            'Merchant.id': 98400,
-            'Merchant.display_name': 'Merchant2'
+            'display_name': 'Merchant2'
           });
     })
   })
