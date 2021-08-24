@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "dev": "nodemon src/server.ts",
     "test": "DB_NAME=postgres-test jest --detectOpenHandles --forceExit",
-    "start": "tsc && node src/server.ts"
+    "start": "nodemon src/server.ts"
   },
   "keywords": [],
   "author": "",

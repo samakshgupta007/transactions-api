@@ -5,6 +5,7 @@ services:
     build:
       context: .
       dockerfile: .Dockerfile
+    restart: always
     depends_on:
       - postgres
     environment:
@@ -13,6 +14,7 @@ services:
       PORT: 4000
     ports:
       - "4000:4000"
+    command: tail -f /dev/null
   postgres:
     container_name: postgres
     image: postgres:10.4
