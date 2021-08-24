@@ -8,8 +8,7 @@ require('dotenv').config();
 describe('Transaction', () => {
     let pool;
 
-    beforeAll(() => {
-        (async () => {
+    beforeAll(async () => {
         pool = new Pool({
             database: 'postgres-test',
             user: 'postgres',
@@ -18,8 +17,6 @@ describe('Transaction', () => {
         });
         pool.query("CREATE TABLE merchants (id SERIAL PRIMARY KEY, display_name TEXT);");
         pool.query("CREATE TABLE transactions (id SERIAL PRIMARY KEY, user_id INTEGER, merchant_id INTEGER, amount INTEGER, description TEXT, date DATE);");
-        })()
-        .catch(e => console.error(e.message, e.stack))
     });
 
     afterAll(() => {
