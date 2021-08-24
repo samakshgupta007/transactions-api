@@ -47,16 +47,32 @@ Moreover, you can run the tests by entering this command in terminal - in the pr
 
     $ npm run test
 
-
 ### Running the Application using Docker
 
-Ensure you have docker and docker-compose installed, if you wish to run the application using docker. Then navigate to the project folder and run the following command in the terminal: 
+Ensure you have docker and docker-compose installed, if you wish to run the application using docker. Then navigate to the project folder and run the following command in the terminal:
 
     $ docker-compose up --build -d
 
 - The '-d' command ensures the container are run in the background or in a 'detached' state.
 
-- You can view the docker containers with their associated ID, name, status, and port using this command
+You can view the docker containers with their associated ID, name, status, and port using this command
 
     $ docker ps -a
 
+Moreover, To see the output of your containers during their execution time, just execute:
+
+    $ docker logs {container}
+
+### Calling the Transactions API
+
+The API is available at the endpoint /api/v1/transactions/:userId?from={some_date_iso_string}&to=${another_date_iso_string}
+
+Calling this endpoint - either on localhost:PORT or using the docker IP address will give you an array of objects of the type:
+
+[{
+"display_name": "Merchant Name",
+"user_id": "userId",
+"Percentile": Floating point number - which needs to multiplied by 100 to get the percentile value
+}]
+
+Or it will return an error due to bad data or unavailable service.
