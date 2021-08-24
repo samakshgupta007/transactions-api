@@ -82,7 +82,7 @@ Or it will return an error due to bad data or unavailable service.
 
 ### Scalability & Resource Consumption
 
-- We will create Expression indices in the 'user_id' and 'merchant_id' fields and a Partial index on the 'date' field in the 'transactions' table. This will help in faster retrieval of the data from the designed API. 
+- We will create indices in the 'user_id' (Hash Index) and 'merchant_id' (B-tree Index) and 'date' (B-tree Index) fields in the 'transactions' table. This will help in faster retrieval of the data from the designed API. 
 
 - Moreover, we can run cron jobs to summarize the data every night and store that summarized data into a summary table. For example, we can update the total spend of each user on each merchant and keep that data in a different table. With indices on the columns of the summary table - our query speed would improve and improve scalability, providing a performance advantage. We might take a small hit in accuracy in this case - however, if the data set is large, then the results would be relatively accurate with maybe 1-2% offsets at the maximum.
 
@@ -100,6 +100,14 @@ In order to scale the application we can use a few other techniques:
 - Distributed, in-memory, scale-out architecture: query performance improves significantly when the underlying database can run SQL on very large data sets that have been distributed and stored in RAM across multiple computers. This is called data sharding, and it makes it possible for queries to run across multiple computers in parallel.
 
 - GPU parallel processing architecture: query performance shifts into an entirely new gear when each computer can also take advantage of the massively parallel compute processing power of GPUs.
+
+- PostgreSQL can devise query plans (parallel query) which can leverage multiple CPUs in order to answer queries faster. For queries that can benefit, the speedup from parallel query is often very significant. Queries that touch a large amount of data but return only a few rows to the user typically benefit most.
+
+- Using a load balancer such as HAProxy or Nginx to distribute the load between multiple servers.
+
+- Sharding the data is key and we would need to ensure that the data is distributed evenly between the shards. We can dissect aggregation, send partial queries to shards in parallel, perform parallel execution on shards and add up data on main node
+
+- Moreover, the query speed could be improved if we can get the data for a particular merchant instead of returning and array with the percentiles of all the merchants.
 
 
 
